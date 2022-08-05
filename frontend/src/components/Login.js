@@ -1,36 +1,30 @@
 import  "./Login.css";
-import {useState} from 'react';
-import Navbar from "../components/Navbar.js";
-import SideDrawer from "../components/SideDrawer.js";
-import Backdrop from "../components/Backdrop.js";
+import {Link} from "react-router-dom";
+
 
 
 const Login = () => {
 
     
-    const [sideToggle, setSideToggle] = useState("");
-    // const [loginIn, setloginIn] = useState("")
      
     return(     
        <>
-       {/* { 
-       loginIn : <Navbar onClick={()=> setSideToggle(true)}/> 
-       } */}
-               
-               <SideDrawer show={sideToggle} />
-               <Backdrop  show={sideToggle} onClick ={()=> setSideToggle(false)}/>
+      
+            
                
                <div class="bg-img">
                      <form  class="container">
                          <h1>Login</h1>
                          <br />
-                         <label for="username & email"><b>UserName & Email</b></label>
-                        <input type="text" placeholder="Enter UserName & Email  " name="username" required/>
+                         <label for="username & email"><b>Username & Email</b></label>
+                        <input type="text" placeholder="Enter username & email  " name="username" required/>
          
-                         <label for="psw"><b>Password</b></label>
-                          <input type="password" placeholder="Enter Password" name="psw" required/>
+                         <label for="Password"><b>Password</b></label>
+                          <input type="password" placeholder="Password" name="Password" required/>
 
-                         <button type="submit" class="btn">Login</button>                  
+                          <Link to="/Forgort Password">Forgort Password</Link>  
+                            
+                             <button type="submit" class="btn">Login</button>                  
                      </form>
                      </div>
         </>
