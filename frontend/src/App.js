@@ -12,7 +12,7 @@ import Navbar from "./components/Navbar";
 import SideDrawer from "./components/SideDrawer";
 import Backdrop from "./components/Backdrop";
 import Login from './components/Login';
-import LoginReg from './components/LoginReg';
+import SignUpReg from './components/SignUpReg';
 import ForgetPassword from './components/ForgetPassword';
 
 
@@ -35,7 +35,7 @@ const App = ()  =>{
          <Route exact path ="/product/:id" element={<ProductScreen />}/>
          <Route exact path ="/cart" element={<CartScreen />}/>
           <Route path="/login"  element={<Login />} />
-          <Route path="/LoginReg"  element={<LoginReg />} />
+          <Route path="/SignUpReg"  element={<SignUpReg />} />
           <Route path="/ForgetPassword"  element={<ForgetPassword />} />
        </Routes>
      </main>

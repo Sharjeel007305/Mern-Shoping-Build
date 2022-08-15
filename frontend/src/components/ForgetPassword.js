@@ -4,16 +4,16 @@ import  "./ForgetPassword.css";
 const ForgetPassword = () => {
 
     return(           
-               <div class="bg-img">
-                     <form  class="forgetpass_container">      
-                     <h1>Forget Password</h1>
+               <div class="forget_container">
+                     <form className="forgetpass_container">      
+                     <h1 className="forget_text">Forget Password</h1>
                         <br />
-                        <div>
+                        <div className="email_container">
                         <label for="email"><b>Email</b></label>
-                          <input type="email" placeholder="email" name="email" required/>
+                          <input className="email_input" type="email" placeholder="Email" name="Email" required/>
                         </div>
                             <br />
-                         <button type="submit" class="btn">Submit</button>                  
+                         <button type="submit" class="forget_btn">Submit</button>                  
                      </form>
                      </div>     
     )

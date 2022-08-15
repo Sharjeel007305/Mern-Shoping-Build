@@ -1,11 +1,18 @@
 import  "./Navbar.css";
 import {Link} from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 const Navbar = ({click}) => {
+  const [Username,setuserName] = useState("");
+  
   const cart = useSelector(state => state.cart);
   const {cartItems} = cart;
 
+  useEffect(()=>{
+    setuserName(localStorage.getItem("UserName") )
+
+  }, [])
   const getCartCount = () => {
     return cartItems.reduce((qty,item) => qty + Number(item.qty), 0);
   }
@@ -20,11 +27,10 @@ const Navbar = ({click}) => {
             <i className="fas fa-shopping-cart"></i>
             <span>
               Login
-              <span className="navbar__badge">{getCartCount()}</span>
             </span>
-              
           </Link>
         </li>  
+        {Username && 
        <li >
           <Link  to="/cart" className="cart__link">
             <i className="fas fa-shopping-cart"></i>
@@ -35,13 +41,16 @@ const Navbar = ({click}) => {
               
           </Link>
       </li>
-          
+}
+    {Username && 
         <li >
           <Link to="/" className="">
             Shop
             </Link>
         </li>
+}
       </ul>
+      
   <div className="hamburger__menu" onClick={click}>
   <div></div>
   <div></div>
