@@ -43,6 +43,36 @@ export const getProductsDetails = (id) => async (dispatch) => {
     }
 };
 
+export const createProduct = (productData) => async (dispatch) => {
+    try {
+        const isFormData = typeof FormData !== "undefined" && productData instanceof FormData;
+        const { data } = await axios.post("/api/products", productData, isFormData ? {
+            headers: { "Content-Type": "multipart/form-data" },
+        } : undefined);
+        await dispatch(getProducts());
+        return data;
+    } catch (error) {
+        throw new Error(
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+        );
+    }
+};
+
+export const deleteProduct = (id) => async (dispatch) => {
+    try {
+        await axios.delete(`/api/products/${id}`);
+        await dispatch(getProducts());
+    } catch (error) {
+        throw new Error(
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+        );
+    }
+};
+
 export const removeProductDetails = () => (dispatch) => {
     dispatch({
         type: actionTypes.GET_PRODUCT_DETAILS_RESET

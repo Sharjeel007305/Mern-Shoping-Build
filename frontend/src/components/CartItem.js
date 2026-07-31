@@ -1,36 +1,61 @@
-import  './CartItem.css'
-import{Link} from "react-router-dom";
+import './CartItem.css';
+import { Link } from "react-router-dom";
 
+const CartItem = ({ item, qtyChangeHandler, removeHandler }) => {
+  const quantity = Number(item.qty) || 1;
+  const updateQuantity = (nextQuantity) => {
+    qtyChangeHandler(item.product, Math.max(1, nextQuantity));
+  };
 
-const CartItem = ({item, qtyChangeHandler, removeHandler }) => {
   return (
     <div className="cartitem">
-        <div className="cartitem__image">
-            <img 
-             src={item.imageUrl}
-             alt={item.name}
-              />
-
-        </div>
-        <Link to={`/product/${item.product}`} className="cartitem__name">
-            <p> {item.name}</p>   
+        <Link to={`/product/${item.product}`} className="cartitem__image">
+          <img src={item.imageUrl} alt={item.name} />
         </Link>
-        <p className="cartitem__price">${item.price}</p>
-        <select className="cartitem__select" value={item.qty} onChange={(e) => qtyChangeHandler(item.product, e.target.value)}>
-            {[...Array(item.countInStock).keys()].map(x => (
-                <option key={x+1} value={x+1}>
-                    {x + 1}
-                </option>
-            ))}
-        </select>
+        <div className="cartitem__details">
+          <Link to={`/product/${item.product}`} className="cartitem__name">
+            {item.name}
+          </Link>
+          <p>${Number(item.price).toFixed(2)} each</p>
+          <div className="cartitem__quantity" aria-label={`Quantity for ${item.name}`}>
+            <button
+              type="button"
+              onClick={() => updateQuantity(quantity - 1)}
+              disabled={quantity <= 1}
+              aria-label="Decrease quantity"
+            >
+              −
+            </button>
+            <input
+              type="number"
+              min="1"
+              step="1"
+              value={quantity}
+              onChange={(event) => updateQuantity(Number(event.target.value) || 1)}
+              aria-label="Quantity"
+            />
+            <button
+              type="button"
+              onClick={() => updateQuantity(quantity + 1)}
+              aria-label="Increase quantity"
+            >
+              +
+            </button>
+          </div>
+        </div>
+        <strong className="cartitem__total">
+          ${(Number(item.price) * quantity).toFixed(2)}
+        </strong>
         <button
-         className="cartitem__deleteBtn" 
-         onClick={() => removeHandler(item.product) }
+          type="button"
+          className="cartitem__deleteBtn"
+          onClick={() => removeHandler(item.product)}
+          aria-label={`Remove ${item.name}`}
         >
-            <i className="fas fa-trash"></i>
+          <i className="fas fa-trash"></i>
         </button>
     </div>
-  )
-}
+  );
+};
 
 export default CartItem;

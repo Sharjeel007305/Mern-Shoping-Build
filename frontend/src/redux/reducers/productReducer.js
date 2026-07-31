@@ -4,8 +4,9 @@ export const getProductsReducer = (state = { products: [] }, action) => {
     switch (action.type) {
         case actionTypes.GET_PRODUCTS_REQUEST:
             return {
+                ...state,
                 loading: true,
-                products: []
+                error: null,
             };
         case actionTypes.GET_PRODUCTS_SUCCESS:
             return {

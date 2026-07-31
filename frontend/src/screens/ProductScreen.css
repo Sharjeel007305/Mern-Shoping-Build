@@ -59,14 +59,32 @@
 .right__info p > button {
     grid-column: 1 /-1;
     padding: 10px 16px;
-    background: #171717;
-    color: #f4f4f4;
-    border: 1px solid #171717;
+    background: var(--sh-orange);
+    color: #fff;
+    border: 1px solid var(--sh-orange);
+    border-radius: 10px;
     cursor: pointer;
+    font-weight: 700;
 }
 
-.right__info select {
-    padding: 10px 16px;
+.right__info select,
+.right__info .qty__input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d0d5dd;
+    border-radius: 6px;
+    font: inherit;
+}
+
+.right__info .qty__input:focus {
+    outline: none;
+    border-color: #12a879;
+    box-shadow: 0 0 0 3px rgba(18, 168, 121, 0.14);
+}
+
+.right__info p > button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
 }
 
 @media(max-width: 960px) {

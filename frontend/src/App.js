@@ -17,16 +17,20 @@ import ForgetPassword from './components/ForgetPassword';
 
 
 
+import Footer from './components/Footer';
+
+
+
 const App = ()  =>{ 
   
-  const [sideToggle, setSideToggle] = useState("");
+  const [sideToggle, setSideToggle] = useState(false);
 
   return (
     <BrowserRouter>     
      <main>
 
-     <Navbar onClick={()=> setSideToggle(true)} />
-       <SideDrawer show={sideToggle} />
+     <Navbar click={()=> setSideToggle(true)} />
+       <SideDrawer show={sideToggle} click={()=> setSideToggle(false)} />
        <Backdrop  show={sideToggle} onClick ={()=> setSideToggle(false)}/> 
 
        <Routes>
@@ -38,6 +42,7 @@ const App = ()  =>{
           <Route path="/SignUpReg"  element={<SignUpReg />} />
           <Route path="/ForgetPassword"  element={<ForgetPassword />} />
        </Routes>
+       <Footer />
      </main>
     </BrowserRouter>
   )

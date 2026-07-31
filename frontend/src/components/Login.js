@@ -1,36 +1,83 @@
-import  "./Login.css";
-import {Link} from "react-router-dom";
-
-
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./Login.css";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-    
-     
-    return(     
-       <>
-               <div class="login_container">
-                     <form  class="login_container1">
-                         <h1 className="login_text">Login</h1>
-                         <br />
-                         <label for="username & email"><b className="UserName_text_deg">Username & Email</b></label>
-                         <input type="text" placeholder="Enter username & email  " name="username" required/>
-         
-                         <label for="Password"><b className="Password_text_deg">Password</b></label>
-                         <input type="password" placeholder="Password" name="Password" required/>
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-                          <Link  className ="forget_pass" to="/ForgetPassword">Forgort Password</Link>  
-                          <Link className ="Sign_up" to="/SignUpReg"> Sign Up </Link>  
-                            
-                        <button type="submit" class="login_btn">Login</button>                  
-                     </form>
-                     </div>
-        </>
-       
-    )
-  
+    const identity = username.trim();
+    if (!identity || !password) {
+      setError("Please enter your email/username and password.");
+      return;
+    }
 
-}
+    localStorage.setItem("UserName", identity);
+    navigate("/");
+  };
+
+  return (
+    <section className="login-page">
+      <div className="login-page__overlay" aria-hidden="true" />
+
+      <div className="login-page__content">
+        <form className="login-card" onSubmit={handleSubmit}>
+          <div className="login-card__heading">
+            <span className="login-card__eyebrow">Welcome back</span>
+            <h1>Sign in to your account</h1>
+            <p>Continue shopping and manage your cart.</p>
+          </div>
+
+          {error && <p className="login-card__error">{error}</p>}
+
+          <div className="login-card__field">
+            <label htmlFor="login-identity">Email or username</label>
+            <input
+              id="login-identity"
+              type="text"
+              name="username"
+              placeholder="you@example.com"
+              autoComplete="username"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+              required
+            />
+          </div>
+
+          <div className="login-card__field">
+            <div className="login-card__label-row">
+              <label htmlFor="login-password">Password</label>
+              <Link to="/ForgetPassword">Forgot password?</Link>
+            </div>
+            <input
+              id="login-password"
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              required
+            />
+          </div>
+
+          <button type="submit" className="login-card__submit">
+            Sign in
+          </button>
+
+          <p className="login-card__signup">
+            New to ShopHub?{" "}
+            <Link to="/SignUpReg">Create an account</Link>
+          </p>
+        </form>
+      </div>
+    </section>
+  );
+};
 
 export default Login;
-

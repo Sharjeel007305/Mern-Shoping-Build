@@ -1,4 +1,5 @@
-import  "./SignUpReg.css";
+import "./SignUpReg.css";
+import { Link } from "react-router-dom";
 
 
 
@@ -7,55 +8,107 @@ const SignUpReg = () => {
     
 
      
-    return(     
-          <div className="reg_container">
-                <div className="reg_container1" >
+    return (
+      <section className="signup-page">
+        <div className="signup-page__overlay" aria-hidden="true" />
 
-                <form id = "reg_form"  action="">
-                    
-                    <h1 className="reg_text">Sign Up</h1>
-                    <br />
-                    <p className="fill_form">Please fill in this form to create an account.</p>
-                        <br />
+        <div className="signup-page__content">
+          <form id="reg_form" className="signup-card">
+            <div className="signup-card__heading">
+              <span className="signup-card__eyebrow">Join us</span>
+              <h1>Create your account</h1>
+              <p>Sign up to start shopping and save your favorite items.</p>
+            </div>
 
-                    <label for="username "><b className="user_text">Username </b></label>
-                    <input id="username" type="text" placeholder="username" name="username" required/>
-            
+            <div className="signup-card__grid">
+              <div className="signup-card__field">
+                <label htmlFor="username">Username</label>
+                <input
+                  id="username"
+                  type="text"
+                  name="username"
+                  placeholder="Choose a username"
+                  autoComplete="username"
+                  required
+                />
+              </div>
 
-                  
-                    <label for="email "><b className="email_text">Email </b></label>
-                    <input id="email" type="text" placeholder="email" name="email" required/>
-                   
+              <div className="signup-card__field">
+                <label htmlFor="email">Email address</label>
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="you@example.com"
+                  autoComplete="email"
+                  required
+                />
+              </div>
 
-                    <div className="gender_ui">
-                    <input type="radio" className="male_ui" name="gender" value="male" checked /> Male 
-                     <input type="radio" className="female_ui" name="gender" value="female"  /> Female 
-                     </div>
+              <fieldset className="signup-card__gender">
+                <legend>Gender</legend>
+                <label>
+                  <input type="radio" name="gender" value="male" defaultChecked />
+                  <span>Male</span>
+                </label>
+                <label>
+                  <input type="radio" name="gender" value="female" />
+                  <span>Female</span>
+                </label>
+              </fieldset>
 
-                    <br/>
-                    <label for="password "><b className="pass_text"> Password </b></label>
-                    <input id="password" type="text" placeholder="password" name="password" required/>
-                   
-
-                   
-                    <label for="confrim_Password "><b className="confrim_Pass_text"> Confrim Password </b></label>
-                    <input id ="confrim_Password" type="text" placeholder="confrim-password" name="confrim_password" required/>
-                   
-                    <label className="rember_sign_up">  Remember me  </label>
-                    <input type="checkbox" checked="checked" name="remember" required /> 
-
-                     <p>By creating an account you agree to our <a href="#" className="terms_privacy">Terms & Privacy</a>.</p> 
-                    {/* <button value="Submit_form" type="submit" className="reg-btn">Submit</button>  */}
-
-                     <div class="clearfix">
-                       <button type="button" class="cancel-btn">Cancel</button>
-                        <button type="submit" class="reg-btn">Register Account</button>
-                    </div>                 
-                </form>
+              <div className="signup-card__passwords">
+                <div className="signup-card__field">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    placeholder="At least 8 characters"
+                    autoComplete="new-password"
+                    minLength="8"
+                    required
+                  />
                 </div>
-                     </div>
-       
-    )
+
+                <div className="signup-card__field">
+                  <label htmlFor="confirm-password">Confirm password</label>
+                  <input
+                    id="confirm-password"
+                    type="password"
+                    name="confirm_password"
+                    placeholder="Repeat your password"
+                    autoComplete="new-password"
+                    minLength="8"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <label className="signup-card__remember">
+              <input type="checkbox" name="remember" />
+              <span>Keep me signed in on this device</span>
+            </label>
+
+            <p className="signup-card__terms">
+              By creating an account, you agree to our Terms &amp; Privacy Policy.
+            </p>
+
+            <div className="signup-card__actions">
+              <Link to="/login" className="signup-card__cancel">Cancel</Link>
+              <button type="submit" className="signup-card__submit">
+                Create account
+              </button>
+            </div>
+
+            <p className="signup-card__login">
+              Already have an account? <Link to="/login">Sign in</Link>
+            </p>
+          </form>
+        </div>
+      </section>
+    );
   
 
 }

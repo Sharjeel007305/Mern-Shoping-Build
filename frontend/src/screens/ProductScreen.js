@@ -14,19 +14,18 @@ const  ProductScreen = (props) => {
   const productDetails = useSelector(state => state.getProductsDetails);
   const {loading, error, product} = productDetails;
 
-  useEffect(()=> {
-    // if(product && match.id !== product._id) {
-
-      // dispatch(getProductsDetails(id))
-    // }
-  }, [dispatch, product]);
-
   useEffect (()=>{
     dispatch(getProductsDetails(id))
-  },[id]);
+  }, [dispatch, id]);
   
   const addToCartHandler = () => {
-    dispatch(addToCart({id:product._id,qty}));
+    const quantity = Number(qty);
+    if (!quantity || quantity < 1) {
+      setQty(1);
+      return;
+    }
+
+    dispatch(addToCart({id:product._id, qty: quantity}));
     navigate("/cart") 
   }
 
@@ -56,17 +55,39 @@ const  ProductScreen = (props) => {
             Status : <span>{product.countInStock > 0 ? "In Stock" : "Out of Stock"}</span>
           </p>
           <p>
-            Qty  
-            <select value={qty} onChange={(e)=> setQty(e.target.value)}>
-              {[...Array(product.countInStock).keys()].map((x) => (
-                <option key={x + 1} value={x+1}>
-                  {x + 1}
-                  </option>
-              ))}
-              </select>
+            Qty
+            <input
+              className="qty__input"
+              type="number"
+              min="1"
+              step="1"
+              value={qty}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value === "") {
+                  setQty("");
+                  return;
+                }
+                const nextQty = Number(value);
+                if (!Number.isNaN(nextQty) && nextQty >= 1) {
+                  setQty(nextQty);
+                }
+              }}
+              onBlur={() => {
+                if (!qty || Number(qty) < 1) {
+                  setQty(1);
+                }
+              }}
+            />
           </p>
           <p>
-            <button type="button" onClick={addToCartHandler}> Add to Cart</button>
+            <button
+              type="button"
+              onClick={addToCartHandler}
+              disabled={product.countInStock <= 0 || !qty || Number(qty) < 1}
+            >
+              Add to Cart
+            </button>
           </p>
         </div>
         </div>

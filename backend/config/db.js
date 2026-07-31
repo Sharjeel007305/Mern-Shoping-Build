@@ -1,7 +1,11 @@
-require('dotenv').config();
 const  mongoose = require('mongoose');
 
 const connectDB = async() => {
+    if (!process.env.MONGO_URI) {
+        console.error("MONGO_URI is not set. Copy .env.example to .env and fill it in.");
+        process.exit(1);
+    }
+
     try {
          await mongoose.connect(process.env.MONGO_URI,{
             useNewUrlParser: true,
@@ -9,7 +13,7 @@ const connectDB = async() => {
         });
         console.log("MongoDB connection SUCCESS");
     } catch (error) {
-        console.error("MongoDB connection FAIL");
+        console.error("MongoDB connection FAIL:", error.message);
         process.exit(1);
         
     }

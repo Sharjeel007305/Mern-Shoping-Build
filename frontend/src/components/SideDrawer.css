@@ -1,5 +1,5 @@
 .sidedrawer {
-    width: 70%;
+    width: min(82%, 340px);
     height: 100vh;
     background: #fff;
     position: fixed;
@@ -11,6 +11,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    box-shadow: 8px 0 30px rgba(17, 17, 17, 0.12);
 }
 
 .sidedrawer.show {
@@ -21,11 +22,33 @@
  display: flex;
  flex-direction: column;
  list-style: none;
+ padding: 1rem;
 }
 
 .sidedrawer__links > li {
     display: flex;
     align-items: center;
+}
+
+.sidedrawer__search-item {
+  margin-bottom: 10px;
+}
+
+.sidedrawer__search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 46px;
+  padding: 0 14px;
+  border: 1px solid var(--sh-line);
+  border-radius: 999px;
+}
+
+.sidedrawer__search input {
+  width: 100%;
+  border: 0;
+  outline: none;
 }
 
 .sidedrawer__links > li > a {
@@ -37,9 +60,27 @@
     padding: 1rem;
     text-decoration: none;
     color: #171717;
-    font-size: 1.6rem;
+    font-size: 1.15rem;
+    font-weight: 700;
 }
 
+.sidedrawer__user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: 8px;
+    padding: 1rem;
+    border: 0;
+    background: transparent;
+    color: #b42318;
+    cursor: pointer;
+    font: inherit;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.sidedrawer__user:hover,
 .sidedrawer__links > li > a:hover {
     background: #171717;
     color: #f4f4f4;
@@ -55,17 +96,17 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
-    background: #171717;
-    color: #f4f4f4;
-    font-size: 1rem;
+    background: var(--sh-orange);
+    color: #fff;
+    font-size: 0.85rem;
     margin-left: 8px;
 }
 
 .sidedrawer__links > li > a:hover .sidedrawer__cartbadge {
-    background: #f4f4f4;
+    background: #fff;
     color: #171717;
 }  
 
